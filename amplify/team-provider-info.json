@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-nomadmbti-dev-231701-authRole",
+      "UnauthRoleArn": "arn:aws:iam::479895153495:role/amplify-nomadmbti-dev-231701-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::479895153495:role/amplify-nomadmbti-dev-231701-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-nomadmbti-dev-231701-deployment",
+      "UnauthRoleName": "amplify-nomadmbti-dev-231701-unauthRole",
+      "StackName": "amplify-nomadmbti-dev-231701",
+      "StackId": "arn:aws:cloudformation:us-east-2:479895153495:stack/amplify-nomadmbti-dev-231701/43eee760-bd6c-11eb-8c0f-06c47b4a50de",
+      "AmplifyAppId": "d39f95k6rjoc41"
+    }
+  }
+}
