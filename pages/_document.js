@@ -10,7 +10,7 @@ class MyDocument extends Document {
           <meta name="theme-color" content="#000000" />
           <link
             rel="shortcut icon"
-            href={require("assets/img/brand/favicon.ico")}
+            href={require("../assets/img/brand/nomadCafeFavicon.png")}
           />
           <link
             rel="apple-touch-icon"

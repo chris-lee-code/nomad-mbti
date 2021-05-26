@@ -1,76 +1,48 @@
-/*!
-
-=========================================================
-* NextJS Argon Dashboard PRO - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/nextjs-argon-dashboard-pro
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-/*eslint-disable*/
 import React from "react";
 
 // reactstrap components
 import { NavItem, NavLink, Nav, Container, Row, Col } from "reactstrap";
+import { COLORS } from "../../public/publicColor";
 
 class Login extends React.Component {
   render() {
     return (
       <>
-        <footer className="py-5" id="footer-main">
+        <footer
+          className="py-5"
+          id="footer-main"
+          style={{ background: COLORS.cafeDarker }}
+        >
           <Container>
             <Row className="align-items-center justify-content-xl-between">
               <Col xl="6">
-                <div className="copyright text-center text-xl-left text-muted">
+                <div className="copyright text-center text-xl-left text-muted d-flex">
                   © {new Date().getFullYear()}{" "}
-                  <a
+                  <div
                     className="font-weight-bold ml-1"
-                    href="https://www.creative-tim.com?ref=njsadp-auth-footer"
-                    target="_blank"
+                    style={{ color: COLORS.cafeLight }}
                   >
-                    Creative Tim
-                  </a>
+                    노마드 카페
+                  </div>
                 </div>
               </Col>
               <Col xl="6">
                 <Nav className="nav-footer justify-content-center justify-content-xl-end">
                   <NavItem>
                     <NavLink
-                      href="https://www.creative-tim.com?ref=njsadp-auth-footer"
+                      href="https://nomadcoders.co/community/type-test"
                       target="_blank"
                     >
-                      Creative Tim
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      href="https://www.creative-tim.com/presentation?ref=njsadp-auth-footer"
-                      target="_blank"
-                    >
-                      About Us
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      href="http://blog.creative-tim.com?ref=njsadp-auth-footer"
-                      target="_blank"
-                    >
-                      Blog
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      href="https://www.creative-tim.com/license?ref=njsadp-auth-footer"
-                      target="_blank"
-                    >
-                      License
+                      <a
+                        className="font-weight-bold ml-1 bg-success py-2 px-2 text-white"
+                        style={{
+                          fontFamily: "Cafe24Dongdong",
+                          borderRadius: "10px",
+                          fontSize: "20px",
+                        }}
+                      >
+                        노마드코더에서 추천하기!
+                      </a>
                     </NavLink>
                   </NavItem>
                 </Nav>

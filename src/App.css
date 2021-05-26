@@ -1,0 +1,11 @@
+@font-face {
+  font-family: "Cafe24Shiningstar";
+  src: local("Cafe24Shiningstar"),
+    url(/fonts/Cafe24Shiningstar.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Cafe24Dongdong";
+  src: local("Cafe24Dongdong"),
+    url(/fonts/Cafe24Dongdong.ttf) format("truetype");
+}
