@@ -13,11 +13,13 @@
     "dev": "next dev"
   },
   "dependencies": {
+    "@aws-amplify/datastore": "^3.0.3",
     "@fullcalendar/core": "5.3.0",
     "@fullcalendar/daygrid": "5.3.0",
     "@fullcalendar/interaction": "5.3.0",
     "@zeit/next-css": "1.0.1",
     "@zeit/next-sass": "1.0.1",
+    "aws-amplify": "^4.0.3",
     "chart.js": "2.9.3",
     "classnames": "2.2.6",
     "dropzone": "5.7.2",
