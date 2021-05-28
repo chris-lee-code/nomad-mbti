@@ -26,6 +26,7 @@ function Result() {
   const [coffee, setCoffee] = useState(null);
   const [description, setDescription] = useState(null);
   const [notFound, setNotFound] = useState(false);
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     // Start the DataStore, this kicks-off the sync process.
@@ -37,6 +38,7 @@ function Result() {
     if (query) {
       setCoffee(Object(query[0])["coffee"]);
       setDescription(Object(query[0])["description"]);
+      setImage(Object(query[0])["image"]);
     }
   }, [query]);
 
@@ -45,13 +47,19 @@ function Result() {
       const recommendation = await DataStore.query(RecommendCoffee, (c) =>
         c.mbti("eq", result)
       );
-      setQuery(recommendation);
-      setNotFound(false);
+      console.log("Query result is: ", recommendation);
+      if (recommendation.length > 0) {
+        setQuery(recommendation);
+        setNotFound(false);
+      } else {
+        setNotFound(true);
+      }
     } catch (error) {
       console.log("Error retrieving posts", error);
       setNotFound(true);
     }
   }
+
   return (
     <>
       {" "}
@@ -136,11 +144,25 @@ function Result() {
                           주문해주셔서 감사합니다! 당신에게 가장 어울리는
                           음료는...
                         </h2>
+                        {image !== "" ? (
+                          <img
+                            className="my-3"
+                            src={image}
+                            style={{ height: "300px" }}
+                          />
+                        ) : (
+                          ""
+                        )}
+
                         <h2
                           className="display-2 font-weight-bold mb-0"
-                          style={{ color: COLORS.cafeDarker, fontSize: "80px" }}
+                          style={{
+                            color: COLORS.cafeDarker,
+                            fontSize: "80px",
+                            fontFamily: "Cafe24Dongdong",
+                          }}
                         >
-                          {coffee}!
+                          {coffee} 라떼
                         </h2>
                         <h2
                           className="display-4 text-white font-weight-light"
@@ -170,7 +192,15 @@ function Result() {
                           }}
                         >
                           이건 비밀인데...혹시 당신은
-                          <div className="font-weight-700 my-5">{mbti}...?</div>
+                          <div
+                            className="font-weight-700 my-5"
+                            style={{
+                              color: COLORS.cafeBrown,
+                              fontSize: "60px",
+                            }}
+                          >
+                            {mbti}...?
+                          </div>
                         </h2>
                         <h2
                           className="display-4 text-white font-weight-light"

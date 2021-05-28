@@ -15,7 +15,7 @@ class Login extends React.Component {
         >
           <Container>
             <Row className="d-flex align-items-center justify-content-xl-between justify-content-center text-xl-left text-center">
-              <Col xl="6" className="bg-red">
+              <Col xl="6" className="">
                 <div className="copyright  text-muted d-flex">
                   © {new Date().getFullYear()}{" "}
                   <div
