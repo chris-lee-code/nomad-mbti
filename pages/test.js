@@ -15,17 +15,42 @@ import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import IndexHeader from "components/Headers/IndexHeader.js";
 import AuthFooter from "components/Footers/AuthFooter.js";
 import { COLORS } from "../public/publicColor";
+import { DataStore } from "@aws-amplify/datastore";
+import { Question, RecommendCoffee } from "../src/models";
+import { Amplify, Hub } from "@aws-amplify/core";
+import awsconfig from "../src/aws-exports";
+Amplify.configure(awsconfig);
+
 function Test() {
   const [step, setStep] = useState(1);
   const [question, setQuestion] = useState("나는 이게 마음에 든다");
   const [option1, setOption1] = useState("");
   const [option2, setOption2] = useState("");
+  const [queries, setQueries] = useState([]);
   let answers = [];
   useEffect(() => {
     if (step !== 1) {
       setQuestion("haha");
     }
   }, [step]);
+
+  useEffect(() => {
+    // Start the DataStore, this kicks-off the sync process.
+    DataStore.start();
+    getQuestions();
+  }, []);
+
+  async function getQuestions() {
+    try {
+      const questions = await DataStore.query(Question, (question) =>
+        question.questionNo("le", 5)
+      );
+      console.log("Query success: ", questions);
+    } catch (error) {
+      console.log("Error retrieving posts", error);
+    }
+  }
+
   return (
     <>
       {" "}
@@ -112,6 +137,7 @@ function Test() {
                         color: "white",
                         width: "100%",
                       }}
+                      onClick={getQuestions}
                     >
                       다음 문제
                     </Button>
