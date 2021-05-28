@@ -17,10 +17,7 @@ import AuthFooter from "components/Footers/AuthFooter.js";
 import { COLORS } from "../public/publicColor";
 import { DataStore, Predicates, SortDirection } from "@aws-amplify/datastore";
 import { Question, RecommendCoffee, Result } from "../src/models";
-import { Amplify, Hub } from "@aws-amplify/core";
-import awsconfig from "../src/aws-exports";
 import { useRouter } from "next/router";
-Amplify.configure(awsconfig);
 
 function Test() {
   const [step, setStep] = useState(0);
