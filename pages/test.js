@@ -16,7 +16,7 @@ import IndexHeader from "components/Headers/IndexHeader.js";
 import AuthFooter from "components/Footers/AuthFooter.js";
 import { COLORS } from "../public/publicColor";
 import { DataStore, Predicates, SortDirection } from "@aws-amplify/datastore";
-import { Question, RecommendCoffee } from "../src/models";
+import { Question, RecommendCoffee, Result } from "../src/models";
 import { Amplify, Hub } from "@aws-amplify/core";
 import awsconfig from "../src/aws-exports";
 import { useRouter } from "next/router";
@@ -42,6 +42,7 @@ function Test() {
     J: 0,
     P: 0,
   });
+  const [isSaved, setIsSaved] = useState(false);
   useEffect(() => {
     if (queries !== [""]) {
       handleQuestion();
@@ -54,16 +55,33 @@ function Test() {
   const router = useRouter();
   useEffect(() => {
     if (result !== "") {
+      saveResult();
+    }
+    if (result !== "" && isSaved) {
       setTimeout(() => {
         router.push(`/result/${result}`);
       }, 3000);
     }
-  }, [result]);
+  }, [result, isSaved]);
   useEffect(() => {
     // Start the DataStore, this kicks-off the sync process.
     DataStore.start();
     getQuestions();
   }, []);
+
+  async function saveResult() {
+    try {
+      await DataStore.save(
+        new Result({
+          result: result,
+        })
+      );
+      setIsSaved(true);
+      console.log("Successfully saved the result");
+    } catch (error) {
+      console.log("Error saving the result: ", error);
+    }
+  }
 
   function handleQuestion() {
     if (Object(queries[step - 1])["question"]) {
