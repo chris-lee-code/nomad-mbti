@@ -85,7 +85,7 @@ function ChooseTest() {
                     id={1}
                     onClick={handleChoice}
                   >
-                    정식 검사 (50 문제)
+                    정식 검사 (50 문제) <br /> English
                   </Button>
                 </div>
               </Col>
@@ -105,7 +105,7 @@ function ChooseTest() {
                     id={2}
                     onClick={handleChoice}
                   >
-                    간단 검사 (13 문제)
+                    간단 검사 (13 문제) <br /> 한국어
                   </Button>
                 </div>
               </Col>

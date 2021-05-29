@@ -43,9 +43,10 @@ function Test() {
   const [isSimplified, setIsSimplified] = useState(null);
 
   const router = useRouter();
+  const { test } = router.query;
   useEffect(() => {
-    const { difficulty } = router.query;
-    if (difficulty === "mbti") {
+    console.log("Difficulty:", test);
+    if (test === "mbti") {
       setIsSimplified(false);
       setLength(50);
       console.log("정식 모드");
@@ -98,7 +99,11 @@ function Test() {
     if (Object(queries[step - 1])["question"]) {
       setQuestion(Object(queries[step - 1])["question"]);
     } else {
-      setQuestion("Which word in each pair appeals to you more?");
+      if (isSimplified) {
+        setQuestion("둘 중 더 끌리는 단어를 선택해주세요!");
+      } else {
+        setQuestion("Which word in each pair appeals to you more?");
+      }
     }
     setOption1(Object(queries[step - 1])["optionOne"]);
     setOption2(Object(queries[step - 1])["optionTwo"]);
@@ -106,9 +111,13 @@ function Test() {
 
   async function getQuestions() {
     try {
-      const questions = await DataStore.query(Question, Predicates.ALL, {
-        sort: (question) => question.questionNo(SortDirection.ASCENDING),
-      });
+      const questions = await DataStore.query(
+        Question,
+        (question) => question.simplified("eq", isSimplified),
+        {
+          sort: (question) => question.questionNo(SortDirection.ASCENDING),
+        }
+      );
       setQueries(questions);
       console.log(questions);
     } catch (error) {
@@ -189,7 +198,7 @@ function Test() {
           style={{
             fontFamily: "Cafe24Shiningstar",
             background: COLORS.cafeLight,
-            minHeight: "600px",
+            minHeight: "800px",
           }}
         >
           <Container>
@@ -205,7 +214,11 @@ function Test() {
                           fontFamily: "Cafe24Dongdong",
                         }}
                       >
-                        주문 감사합니다! 바로 시작할게요!
+                        {isSimplified ? (
+                          <>주문 감사합니다! 바로 시작할게요!</>
+                        ) : (
+                          <>Thank for for your order. Let's get started!</>
+                        )}
                       </h2>
                     </div>
                   </Col>
@@ -227,7 +240,7 @@ function Test() {
                         id={1}
                         onClick={handleChoice}
                       >
-                        Male
+                        {isSimplified ? <>남성</> : <>Male</>}
                       </Button>
                     </div>
                   </Col>
@@ -247,7 +260,7 @@ function Test() {
                         id={2}
                         onClick={handleChoice}
                       >
-                        Female
+                        {isSimplified ? <>여성</> : <>Female</>}
                       </Button>
                     </div>
                   </Col>
@@ -269,7 +282,11 @@ function Test() {
                         id={3}
                         onClick={handleChoice}
                       >
-                        Prefer Not To Say
+                        {isSimplified ? (
+                          <>말하고 싶지 않아요.</>
+                        ) : (
+                          <>Prefer Not To Say</>
+                        )}
                       </Button>
                     </div>
                   </Col>
@@ -289,7 +306,7 @@ function Test() {
                       onClick={handleNext}
                       disabled={!chosen}
                     >
-                      다음 문제!
+                      {isSimplified ? <>다음 문제!</> : <>Next question!</>}
                     </Button>
                   </Col>
                 </Row>
@@ -308,8 +325,17 @@ function Test() {
                               fontFamily: "Cafe24Dongdong",
                             }}
                           >
-                            제가 커피를 준비하는 동안 아래 나오는 문제들을
-                            답해주세요!
+                            {isSimplified ? (
+                              <>
+                                제가 커피를 준비하는 동안 아래 나오는 문제들을
+                                답해주세요!
+                              </>
+                            ) : (
+                              <>
+                                While I'm preparing your coffee, please answer
+                                the questions below!
+                              </>
+                            )}
                           </h2>
                         </div>
                       </Col>
@@ -399,7 +425,7 @@ function Test() {
                           onClick={handleNext}
                           disabled={!chosen}
                         >
-                          다음 문제!
+                          {isSimplified ? <>다음 문제!</> : <>Next question!</>}
                         </Button>
                       </Col>
                     </Row>
@@ -416,7 +442,7 @@ function Test() {
                               fontFamily: "Cafe24Dongdong",
                             }}
                           >
-                            끝났어요!
+                            {isSimplified ? <> 끝났어요!</> : <>Done!</>}
                           </h2>
                         </div>
                       </Col>
@@ -431,7 +457,11 @@ function Test() {
                             color: COLORS.cafeDarker,
                           }}
                         >
-                          잠시만 기다려주세요...
+                          {isSimplified ? (
+                            <> 잠시만 기다려주세요...</>
+                          ) : (
+                            <>Please wait...</>
+                          )}
                         </h2>
                       </Col>
                     </Row>
@@ -445,7 +475,11 @@ function Test() {
                             color: COLORS.cafeDarker,
                           }}
                         >
-                          가장 완벽한 커피를 추천해드릴게요!
+                          {isSimplified ? (
+                            <> 가장 완벽한 커피를 추천해드릴게요!</>
+                          ) : (
+                            <>I will recommend the best coffee for you!</>
+                          )}
                         </h2>
                       </Col>
                     </Row>
@@ -459,7 +493,7 @@ function Test() {
                               fontSize: "60px",
                             }}
                           >
-                            노마드 카페
+                            {isSimplified ? <> 노마드 카페</> : <>Nomadcafe</>}
                           </h1>
                           <img
                             src={require("../../assets/img/brand/nomadCafeFavicon.png")}

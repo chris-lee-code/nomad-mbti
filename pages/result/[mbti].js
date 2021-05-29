@@ -162,10 +162,10 @@ function Result() {
                             fontFamily: "Cafe24Dongdong",
                           }}
                         >
-                          {coffee} 라떼
+                          {coffee}
                         </h2>
                         <h2
-                          className="display-4 text-white font-weight-light"
+                          className="display-4 mt-5 text-white font-weight-light"
                           style={{
                             fontSize: "30px",
                             fontFamily: "Cafe24Dongdong",
@@ -185,7 +185,7 @@ function Result() {
                           {description}
                         </h2>
                         <h2
-                          className="display-4 text-white font-weight-light"
+                          className="display-4 mt-5 text-white font-weight-light"
                           style={{
                             fontSize: "30px",
                             fontFamily: "Cafe24Dongdong",

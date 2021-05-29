@@ -17,23 +17,75 @@ import IndexHeader from "components/Headers/IndexHeader.js";
 import AuthFooter from "components/Footers/AuthFooter.js";
 import { COLORS } from "../public/publicColor";
 import { DataStore } from "aws-amplify";
-import { Result } from "../src/models";
+import { RecommendCoffee, Result } from "../src/models";
 import Amplify from "aws-amplify";
-import awsconfig from "../src/aws-exports";
-Amplify.configure(awsconfig);
 
 function Index() {
   const [registered, setRegistered] = useState(null);
+  const [results, setResults] = useState(null);
+  const [popularCoffee, setPopularCoffee] = useState(null);
+  const [howMany, setHowMany] = useState(null);
+  const [percentage, setPercentage] = useState(null);
   useEffect(() => {
     getResults();
   }, []);
   async function getResults() {
     try {
       const results = await DataStore.query(Result);
-      console.log("The length is...", results);
+      let resultArr = [];
+      for (const result of results) {
+        resultArr.push(Object(result)["result"]);
+      }
+
+      setResults(resultArr);
+
+      setRegistered(results.length);
     } catch (error) {
       console.log("Error getting results: ", error);
     }
+  }
+
+  useEffect(() => {
+    if (results && registered) {
+      const popularMBTI = getMostFrequent(results);
+      getMBTInum(popularMBTI[0]);
+      getCoffee(popularMBTI[0]);
+    }
+  }, [results, registered]);
+
+  function getMBTInum(mbti) {
+    let counter = 0;
+    for (const result of results) {
+      if (result === mbti) {
+        counter++;
+      }
+    }
+    let percentage;
+    percentage = Math.floor((counter / registered) * 100);
+    setPercentage(percentage);
+  }
+
+  async function getCoffee(mbti) {
+    try {
+      const coffee = await DataStore.query(RecommendCoffee, (c) =>
+        c.mbti("eq", mbti)
+      );
+      setPopularCoffee(coffee[0]["coffee"]);
+    } catch (error) {
+      console.log("Error getting results: ", error);
+    }
+  }
+
+  function getMostFrequent(arr) {
+    let counts = arr.reduce((a, c) => {
+      a[c] = (a[c] || 0) + 1;
+      return a;
+    }, {});
+    let maxCount = Math.max(...Object.values(counts));
+    let mostFrequent = Object.keys(counts).filter(
+      (k) => counts[k] === maxCount
+    );
+    return mostFrequent;
   }
   return (
     <>
@@ -65,7 +117,7 @@ function Index() {
                       className="display-2 font-weight-bold mb-0"
                       style={{ color: COLORS.cafeDarker, fontSize: "80px" }}
                     >
-                      990잔
+                      {registered} 잔
                     </h2>
                     <h2
                       className="display-4 text-white font-weight-light"
@@ -81,7 +133,7 @@ function Index() {
                       className="display-2 font-weight-bold mb-0"
                       style={{ color: COLORS.cafeDarker, fontSize: "80px" }}
                     >
-                      카페 라떼
+                      {popularCoffee}
                     </h2>
                     <h2
                       className="display-4 text-white font-weight-light"
@@ -91,7 +143,7 @@ function Index() {
                       }}
                     >
                       총 주문 중 무려{" "}
-                      <div className="font-weight-700">70%...!</div>
+                      <div className="font-weight-700">{percentage}%...!</div>
                     </h2>
                     <h2
                       className="display-4 text-white font-weight-light"
