@@ -69,7 +69,7 @@ function ChooseTest() {
               </Col>
             </Row>
             <Row className="justify-content-center text-center align-items-center">
-              <Col lg="4" xs="6">
+              <Col lg="4" md="6" xs="10">
                 <div className="px-2 py-2">
                   <Button
                     className="btn-neutral my-2 py-3 px-5"
@@ -89,7 +89,7 @@ function ChooseTest() {
                   </Button>
                 </div>
               </Col>
-              <Col lg="4" xs="6">
+              <Col lg="4" md="6" xs="10">
                 <div className="px-2 py-2">
                   <Button
                     className="btn-neutral my-2 py-3 px-5"
@@ -112,7 +112,7 @@ function ChooseTest() {
             </Row>
 
             <Row className="justify-content-center text-center align-items-center mt-5">
-              <Col lg="4" xs="6">
+              <Col lg="4" md="6" xs="10">
                 <Button
                   className="btn-neutral my-2 py-3 px-5"
                   style={{

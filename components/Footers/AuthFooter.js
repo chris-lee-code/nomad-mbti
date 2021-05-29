@@ -14,9 +14,9 @@ class Login extends React.Component {
           style={{ background: COLORS.cafeDarker }}
         >
           <Container>
-            <Row className="d-flex align-items-center justify-content-xl-between justify-content-center text-xl-left text-center">
-              <Col xl="6" className="">
-                <div className="copyright  text-muted d-flex">
+            <Row className="d-flex align-items-center justify-content-xl-between justify-content-center text-lg-left text-center">
+              <Col xl="6" className="text-lg-left text-center">
+                <div className="copyright  text-xl-left text-center text-muted d-flex justify-content-xl-start justify-content-center mb-3 mb-xl-0 text-success">
                   © {new Date().getFullYear()}{" "}
                   <div
                     className="font-weight-bold ml-1"

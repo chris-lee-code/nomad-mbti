@@ -224,7 +224,7 @@ function Test() {
                   </Col>
                 </Row>
                 <Row className="justify-content-center text-center align-items-center">
-                  <Col lg="4" xs="6">
+                  <Col lg="4" md="6" xs="10">
                     <div className="px-2 py-2">
                       <Button
                         className="btn-neutral my-2 py-3 px-5"
@@ -244,7 +244,7 @@ function Test() {
                       </Button>
                     </div>
                   </Col>
-                  <Col lg="4" xs="6">
+                  <Col lg="4" md="6" xs="10">
                     <div className="px-2 py-2">
                       <Button
                         className="btn-neutral my-2 py-3 px-5"
@@ -266,7 +266,7 @@ function Test() {
                   </Col>
                 </Row>
                 <Row className="justify-content-center text-center align-items-center">
-                  <Col lg="4" xs="6">
+                  <Col lg="4" md="6" xs="10">
                     <div className="px-2 py-5">
                       <Button
                         className="btn-neutral my-2 py-3 px-5"
@@ -292,7 +292,7 @@ function Test() {
                   </Col>
                 </Row>
                 <Row className="justify-content-center text-center align-items-center mt-5">
-                  <Col lg="4" xs="6">
+                  <Col lg="4" md="6" xs="10">
                     <Button
                       className="btn-neutral my-2 py-3 px-5"
                       style={{
@@ -369,10 +369,10 @@ function Test() {
                       </Col>
                     </Row>
                     <Row className="justify-content-center text-center align-items-center">
-                      <Col lg="4" xs="6">
+                      <Col lg="4" md="6" xs="10">
                         <div className="px-2 py-5">
                           <Button
-                            className="btn-neutral my-2 py-3 px-5"
+                            className="btn-neutral my-lg-2 py-3 px-5"
                             style={{
                               fontSize: "20px",
                               fontFamily: "Cafe24Dongdong",
@@ -389,10 +389,10 @@ function Test() {
                           </Button>
                         </div>
                       </Col>
-                      <Col lg="4" xs="6">
-                        <div className="px-2 py-5">
+                      <Col lg="4" md="6" xs="10">
+                        <div className="px-2 py-lg-5">
                           <Button
-                            className="btn-neutral my-2 py-3 px-5"
+                            className="btn-neutral my-lg-2 py-3 px-5"
                             style={{
                               fontSize: "20px",
                               fontFamily: "Cafe24Dongdong",
@@ -411,7 +411,7 @@ function Test() {
                       </Col>
                     </Row>
                     <Row className="justify-content-center text-center align-items-center mt-5">
-                      <Col lg="4" xs="6">
+                      <Col lg="4" md="6" xs="10">
                         <Button
                           className="btn-neutral my-2 py-3 px-5"
                           style={{
