@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 // reactstrap components
 import {
@@ -16,8 +16,25 @@ import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import IndexHeader from "components/Headers/IndexHeader.js";
 import AuthFooter from "components/Footers/AuthFooter.js";
 import { COLORS } from "../public/publicColor";
+import { DataStore } from "aws-amplify";
+import { Result } from "../src/models";
+import Amplify from "aws-amplify";
+import awsconfig from "../src/aws-exports";
+Amplify.configure(awsconfig);
 
 function Index() {
+  const [registered, setRegistered] = useState(null);
+  useEffect(() => {
+    getResults();
+  }, []);
+  async function getResults() {
+    try {
+      const results = await DataStore.query(Result);
+      console.log("The length is...", results);
+    } catch (error) {
+      console.log("Error getting results: ", error);
+    }
+  }
   return (
     <>
       <IndexNavbar />

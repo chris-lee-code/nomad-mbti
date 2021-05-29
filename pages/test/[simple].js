@@ -14,18 +14,18 @@ import {
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import IndexHeader from "components/Headers/IndexHeader.js";
 import AuthFooter from "components/Footers/AuthFooter.js";
-import { COLORS } from "../public/publicColor";
+import { COLORS } from "../../public/publicColor";
 import { DataStore, Predicates, SortDirection } from "@aws-amplify/datastore";
-import { Question, RecommendCoffee, Result } from "../src/models";
+import { Question, RecommendCoffee, Result } from "../../src/models";
 import { useRouter } from "next/router";
 
 function Test() {
+  const [length, setLength] = useState(null);
   const [step, setStep] = useState(0);
-  const [question, setQuestion] = useState("나는 이게 마음에 든다");
+  const [question, setQuestion] = useState("");
   const [option1, setOption1] = useState("");
   const [option2, setOption2] = useState("");
   const [queries, setQueries] = useState([""]);
-  const [questions, setQuestions] = useState([]);
   const [chosen, setChosen] = useState(null);
   const [gender, setGender] = useState(null);
   const [result, setResult] = useState("");
@@ -40,16 +40,31 @@ function Test() {
     P: 0,
   });
   const [isSaved, setIsSaved] = useState(false);
+  const [isSimplified, setIsSimplified] = useState(null);
+
+  const router = useRouter();
+  useEffect(() => {
+    const { difficulty } = router.query;
+    if (difficulty === "mbti") {
+      setIsSimplified(false);
+      setLength(50);
+      console.log("정식 모드");
+    } else {
+      setIsSimplified(true);
+      setLength(13);
+      console.log("간단 모드");
+    }
+  }, []);
+
   useEffect(() => {
     if (queries !== [""]) {
       handleQuestion();
     }
-    if (step === 51) {
+    if (step > length) {
       const result = handleResult();
       setResult(result);
     }
   }, [step, queries]);
-  const router = useRouter();
   useEffect(() => {
     if (result !== "") {
       saveResult();
@@ -61,7 +76,6 @@ function Test() {
     }
   }, [result, isSaved]);
   useEffect(() => {
-    // Start the DataStore, this kicks-off the sync process.
     DataStore.start();
     getQuestions();
   }, []);
@@ -96,6 +110,7 @@ function Test() {
         sort: (question) => question.questionNo(SortDirection.ASCENDING),
       });
       setQueries(questions);
+      console.log(questions);
     } catch (error) {
       console.log("Error retrieving posts", error);
     }
@@ -281,7 +296,7 @@ function Test() {
               </>
             ) : (
               <>
-                {step < 51 ? (
+                {step <= length ? (
                   <>
                     <Row className="justify-content-center text-center align-items-center">
                       <Col lg="8">
@@ -447,7 +462,7 @@ function Test() {
                             노마드 카페
                           </h1>
                           <img
-                            src={require("../assets/img/brand/nomadCafeFavicon.png")}
+                            src={require("../../assets/img/brand/nomadCafeFavicon.png")}
                             style={{ width: "50px", height: "50px" }}
                           />
                         </div>
