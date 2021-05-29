@@ -18,8 +18,6 @@ import AuthFooter from "components/Footers/AuthFooter.js";
 import { COLORS } from "../public/publicColor";
 import { DataStore } from "aws-amplify";
 import { RecommendCoffee, Result } from "../src/models";
-import Amplify from "aws-amplify";
-
 function Index() {
   const [registered, setRegistered] = useState(null);
   const [results, setResults] = useState(null);
@@ -28,7 +26,12 @@ function Index() {
   const [percentage, setPercentage] = useState(null);
   useEffect(() => {
     getResults();
+    startDatastore();
   }, []);
+
+  async function startDatastore() {
+    await DataStore.start();
+  }
   async function getResults() {
     try {
       const results = await DataStore.query(Result);
