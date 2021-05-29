@@ -45,7 +45,6 @@ function Test() {
   const router = useRouter();
   const { test } = router.query;
   useEffect(() => {
-    console.log("Difficulty:", test);
     if (test === "mbti") {
       setIsSimplified(false);
       setLength(50);

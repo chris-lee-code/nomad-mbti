@@ -22,7 +22,6 @@ function Index() {
   const [registered, setRegistered] = useState(null);
   const [results, setResults] = useState(null);
   const [popularCoffee, setPopularCoffee] = useState(null);
-  const [howMany, setHowMany] = useState(null);
   const [percentage, setPercentage] = useState(null);
   useEffect(() => {
     getResults();
@@ -30,7 +29,12 @@ function Index() {
   }, []);
 
   async function startDatastore() {
-    await DataStore.start();
+    try {
+      await DataStore.start();
+      console.log("Datastore was successfully started.");
+    } catch (error) {
+      console.log("Error starting the Datastore: ", error);
+    }
   }
   async function getResults() {
     try {
@@ -39,10 +43,10 @@ function Index() {
       for (const result of results) {
         resultArr.push(Object(result)["result"]);
       }
-
       setResults(resultArr);
-
       setRegistered(results.length);
+      console.log(`We have so far ${results.length} orders.`);
+      console.log("The result was successfully retrieved from Datastore.");
     } catch (error) {
       console.log("Error getting results: ", error);
     }
@@ -66,6 +70,7 @@ function Index() {
     let percentage;
     percentage = Math.floor((counter / registered) * 100);
     setPercentage(percentage);
+    console.log("The percentage for the most popular coffee is: ", percentage);
   }
 
   async function getCoffee(mbti) {
@@ -74,6 +79,7 @@ function Index() {
         c.mbti("eq", mbti)
       );
       setPopularCoffee(coffee[0]["coffee"]);
+      console.log("The most popular coffee is: ", coffee[0]["coffee"]);
     } catch (error) {
       console.log("Error getting results: ", error);
     }
