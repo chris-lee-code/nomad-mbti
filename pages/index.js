@@ -39,14 +39,18 @@ function Index() {
   async function getResults() {
     try {
       const results = await DataStore.query(Result);
-      let resultArr = [];
-      for (const result of results) {
-        resultArr.push(Object(result)["result"]);
+      if (results) {
+        console.log("The result was successfully retrieved from Datastore.");
+        let resultArr = [];
+        for (const result of results) {
+          resultArr.push(Object(result)["result"]);
+        }
+        setResults(resultArr);
+        setRegistered(results.length);
+        console.log(`We have so far ${results.length} orders.`);
+      } else {
+        console.log("Failed to retrieve the results. ");
       }
-      setResults(resultArr);
-      setRegistered(results.length);
-      console.log(`We have so far ${results.length} orders.`);
-      console.log("The result was successfully retrieved from Datastore.");
     } catch (error) {
       console.log("Error getting results: ", error);
     }
@@ -78,8 +82,12 @@ function Index() {
       const coffee = await DataStore.query(RecommendCoffee, (c) =>
         c.mbti("eq", mbti)
       );
-      setPopularCoffee(coffee[0]["coffee"]);
-      console.log("The most popular coffee is: ", coffee[0]["coffee"]);
+      if (coffee) {
+        setPopularCoffee(coffee[0]["coffee"]);
+        console.log("The most popular coffee is: ", coffee[0]["coffee"]);
+      } else {
+        console.log("Failed to retrieve the most popular coffee");
+      }
     } catch (error) {
       console.log("Error getting results: ", error);
     }
