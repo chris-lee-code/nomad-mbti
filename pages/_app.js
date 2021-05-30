@@ -24,8 +24,11 @@ import "assets/scss/nextjs-argon-dashboard-pro.scss?v1.0.0";
 import "../src/App.css";
 import { DataStore } from "@aws-amplify/datastore";
 import Amplify from "@aws-amplify/core";
-import awsmobile from "../src/aws-exports/";
-
+import awsmobile from "../src/aws-exports";
+Amplify.configure({
+  ...awsmobile,
+  ssr: true,
+});
 Router.events.on("routeChangeStart", (url) => {
   console.log(`Loading: ${url}`);
   document.body.classList.add("body-page-transition");
@@ -48,7 +51,6 @@ export default class MyApp extends App {
     let comment = document.createComment(`
 `);
     DataStore.configure();
-    Amplify.configure(awsmobile);
     document.insertBefore(comment, document.documentElement);
   }
   static async getInitialProps({ Component, router, ctx }) {
