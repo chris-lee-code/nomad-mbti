@@ -100,6 +100,21 @@ class AdminNavbar extends React.Component {
                     </NavLink>
                   </Link>
                 </NavItem>
+                <NavItem>
+                  <Link href="/result">
+                    <NavLink href="#pablo">
+                      <span
+                        className="nav-link-inner--text"
+                        style={{
+                          fontSize: "20px",
+                          fontFamily: "Cafe24Dongdong",
+                        }}
+                      >
+                        메뉴판
+                      </span>
+                    </NavLink>
+                  </Link>
+                </NavItem>
               </Nav>
               <hr className="d-lg-none" />
               <Nav className="align-items-lg-center ml-lg-auto" navbar>

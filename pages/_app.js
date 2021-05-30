@@ -22,6 +22,9 @@ import "assets/vendor/@fortawesome/fontawesome-free/css/all.min.css";
 // core styles
 import "assets/scss/nextjs-argon-dashboard-pro.scss?v1.0.0";
 import "../src/App.css";
+import { DataStore } from "@aws-amplify/datastore";
+import Amplify from "@aws-amplify/core";
+import awsmobile from "../src/aws-exports";
 
 Router.events.on("routeChangeStart", (url) => {
   console.log(`Loading: ${url}`);
@@ -46,6 +49,8 @@ export default class MyApp extends App {
 
 
 `);
+    DataStore.configure();
+    Amplify.configure(awsmobile);
     document.insertBefore(comment, document.documentElement);
   }
   static async getInitialProps({ Component, router, ctx }) {

@@ -66,7 +66,7 @@ function Test() {
     }
   }, [step, queries]);
   useEffect(() => {
-    if (result !== "") {
+    if (result !== "" && isSaved === false) {
       saveResult();
     }
     if (result !== "" && isSaved) {
@@ -77,14 +77,17 @@ function Test() {
   }, [result, isSaved]);
   useEffect(() => {
     DataStore.start();
-    getQuestions();
-  }, []);
+    if (isSimplified) {
+      getQuestions();
+    }
+  }, [isSimplified]);
 
   async function saveResult() {
     try {
       await DataStore.save(
         new Result({
           result: result,
+          simplified: isSimplified,
         })
       );
       setIsSaved(true);
@@ -130,11 +133,20 @@ function Test() {
     if (step > 0) {
       console.log("The gender is...", gender);
       let updatedAnswers = answers;
-      while (counter < Object(queries[step - 1])["onePoint"]) {
-        updatedAnswers[Object(queries[step - 1])["oneType"]] += 1;
-        counter += 1;
+      if (chosen === "1") {
+        while (counter < Object(queries[step - 1])["onePoint"]) {
+          updatedAnswers[Object(queries[step - 1])["oneType"]] += 1;
+          counter += 1;
+        }
+        console.log("Chosen type is...", Object(queries[step - 1])["oneType"]);
+      } else {
+        while (counter < Object(queries[step - 1])["twoPoint"]) {
+          updatedAnswers[Object(queries[step - 1])["twoType"]] += 1;
+          counter += 1;
+        }
+        console.log("Chosen type is...", Object(queries[step - 1])["twoType"]);
       }
-      console.log("Chosen type is...", Object(queries[step - 1])["oneType"]);
+
       console.log("Currently...", updatedAnswers);
       setAnswers(updatedAnswers);
     } else {

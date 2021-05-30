@@ -16,35 +16,40 @@ import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import IndexHeader from "components/Headers/IndexHeader.js";
 import AuthFooter from "components/Footers/AuthFooter.js";
 import { COLORS } from "../public/publicColor";
-import { DataStore } from "aws-amplify";
+import { DataStore, Predicates } from "@aws-amplify/datastore";
 import { RecommendCoffee, Result } from "../src/models";
+
 function Index() {
   const [registered, setRegistered] = useState(null);
   const [results, setResults] = useState(null);
   const [popularCoffee, setPopularCoffee] = useState(null);
   const [percentage, setPercentage] = useState(null);
   useEffect(() => {
+    if (!results) {
+      getResults();
+    }
+    const subscription = DataStore.observe(Result).subscribe(() =>
+      getResults()
+    );
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [results]);
+
+  useEffect(() => {
     getResults();
-    startDatastore();
   }, []);
 
-  async function startDatastore() {
-    try {
-      await DataStore.start();
-      console.log("Datastore was successfully started.");
-    } catch (error) {
-      console.log("Error starting the Datastore: ", error);
-    }
-  }
   async function getResults() {
     try {
-      const results = await DataStore.query(Result);
+      const results = await DataStore.query(Result, Predicates.ALL);
       if (results) {
         console.log("The result was successfully retrieved from Datastore.");
         let resultArr = [];
         for (const result of results) {
           resultArr.push(Object(result)["result"]);
         }
+        console.log("Result array: ", resultArr);
         setResults(resultArr);
         setRegistered(results.length);
         console.log(`We have so far ${results.length} orders.`);
