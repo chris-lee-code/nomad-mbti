@@ -149,7 +149,7 @@ function Index() {
                       className="display-2 font-weight-bold mb-0"
                       style={{ color: COLORS.cafeDarker, fontSize: "80px" }}
                     >
-                      {registered} 잔
+                      {registered ? registered : <>...</>} 잔
                     </h2>
                     <h2
                       className="display-4 text-white font-weight-light"
@@ -165,7 +165,7 @@ function Index() {
                       className="display-2 font-weight-bold mb-0"
                       style={{ color: COLORS.cafeDarker, fontSize: "80px" }}
                     >
-                      {popularCoffee}
+                      {popularCoffee ? popularCoffee : <>...</>}
                     </h2>
                     <h2
                       className="display-4 text-white font-weight-light"

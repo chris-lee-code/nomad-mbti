@@ -38,6 +38,7 @@ function ResultIndex() {
   async function getResults() {
     try {
       const recommendQueries = await DataStore.query(RecommendCoffee);
+      console.log("recommendQueries: ", recommendQueries);
       if (recommendQueries && recommendQueries !== undefined) {
         let menuObj = {};
         for (const menu of recommendQueries) {
@@ -153,7 +154,7 @@ function ResultIndex() {
                       className="display-2 font-weight-bold mb-0"
                       style={{ color: COLORS.cafeDarker, fontSize: "100px" }}
                     >
-                      {mostFrequent}
+                      {mostFrequent ? mostFrequent : <>...</>}
                     </h2>
                     <h2
                       className="display-4 text-white font-weight-light mb-5"
