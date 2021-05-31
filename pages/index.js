@@ -175,7 +175,9 @@ function Index() {
                       }}
                     >
                       총 주문 중 무려{" "}
-                      <div className="font-weight-700">{percentage}%...!</div>
+                      <div className="font-weight-700">
+                        {percentage ? percentage : <>##</>}%...!
+                      </div>
                     </h2>
                     <h2
                       className="display-4 text-white font-weight-light"
