@@ -10,6 +10,7 @@ export declare class RecommendCoffee {
   readonly coffee?: string;
   readonly description?: string;
   readonly image?: string;
+  readonly korean?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<RecommendCoffee>);

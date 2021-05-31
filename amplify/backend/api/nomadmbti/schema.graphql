@@ -4,6 +4,7 @@ type RecommendCoffee @model @auth(rules: [{allow: public, operations: [read]}]) 
   coffee: String
   description: String
   image: String
+  korean: String
 }
 
 type Result @model @auth(rules: [{allow: public}]) {

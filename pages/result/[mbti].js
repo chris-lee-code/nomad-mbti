@@ -25,6 +25,7 @@ function Result() {
   const [query, setQuery] = useState(null);
   const [coffee, setCoffee] = useState(null);
   const [description, setDescription] = useState(null);
+  const [korean, setKorean] = useState(null);
   const [notFound, setNotFound] = useState(false);
   const [image, setImage] = useState("");
 
@@ -38,6 +39,7 @@ function Result() {
     if (query) {
       setCoffee(Object(query[0])["coffee"]);
       setDescription(Object(query[0])["description"]);
+      setKorean(Object(query[0])["korean"]);
       setImage(Object(query[0])["image"]);
     }
   }, [query]);
@@ -164,26 +166,45 @@ function Result() {
                         >
                           {coffee}
                         </h2>
-                        <h2
-                          className="display-4 mt-5 text-white font-weight-light"
-                          style={{
-                            fontSize: "30px",
-                            fontFamily: "Cafe24Dongdong",
-                          }}
-                        >
-                          그냥 아무렇게나 알려드린건 아니에요. 다 이유가
-                          있다구요!
-                        </h2>
-                        <h2
-                          className="display-4 font-weight-light"
-                          style={{
-                            fontSize: "30px",
-                            color: COLORS.cafeDarker,
-                            fontFamily: "Cafe24Dongdong",
-                          }}
-                        >
-                          {description}
-                        </h2>
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row className="justify-content-center text-center align-items-center">
+                    <Col lg="10">
+                      <h2
+                        className="display-4 mt-5 text-white font-weight-light"
+                        style={{
+                          fontSize: "30px",
+                          fontFamily: "Cafe24Dongdong",
+                        }}
+                      >
+                        그냥 아무렇게나 알려드린건 아니에요. 다 이유가 있다구요!
+                      </h2>
+                      <h2
+                        className="display-4 font-weight-light mt-5"
+                        style={{
+                          fontSize: "30px",
+                          color: COLORS.cafeDarker,
+                          fontFamily: "Cafe24Dongdong",
+                        }}
+                      >
+                        {korean}
+                      </h2>
+                      <h2
+                        className="display-4 font-weight-light mt-5"
+                        style={{
+                          fontSize: "30px",
+                          color: COLORS.cafeDarker,
+                          fontFamily: "Cafe24Dongdong",
+                        }}
+                      >
+                        {description}
+                      </h2>
+                    </Col>
+                  </Row>
+                  <Row className="justify-content-center text-center align-items-center">
+                    <Col lg="8">
+                      <div className="px-2">
                         <h2
                           className="display-4 mt-5 text-white font-weight-light"
                           style={{
@@ -203,7 +224,19 @@ function Result() {
                           </div>
                         </h2>
                         <h2
-                          className="display-4 text-white font-weight-light"
+                          className="display-4 font-weight-light"
+                          style={{
+                            fontSize: "30px",
+                            fontFamily: "Cafe24Dongdong",
+                            color: COLORS.cafeDarker,
+                          }}
+                        >
+                          혹시 간단 검사를 하셨다면 <br />
+                          완벽하게 맞추는 건 쉽지 않아요... <br />
+                          아무튼 재미로 즐겨 주세요!
+                        </h2>
+                        <h2
+                          className="display-4 text-white font-weight-light mt-5"
                           style={{
                             fontSize: "30px",
                             fontFamily: "Cafe24Dongdong",

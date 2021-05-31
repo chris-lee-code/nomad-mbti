@@ -38,6 +38,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "korean": {
+                    "name": "korean",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -258,5 +265,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "c083b298b5c39950a5fcaa6b34576203"
+    "version": "a2bf4ef12f388a758ade7cba00af1d04"
 };
