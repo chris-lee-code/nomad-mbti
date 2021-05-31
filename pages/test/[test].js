@@ -77,7 +77,7 @@ function Test() {
   }, [result, isSaved]);
   useEffect(() => {
     DataStore.start();
-    if (isSimplified) {
+    if (isSimplified !== null) {
       getQuestions();
     }
   }, [isSimplified]);
@@ -113,17 +113,29 @@ function Test() {
 
   async function getQuestions() {
     try {
-      const questions = await DataStore.query(
-        Question,
-        (question) => question.simplified("eq", isSimplified),
-        {
-          sort: (question) => question.questionNo(SortDirection.ASCENDING),
-        }
-      );
+      let questions;
+      if (isSimplified === true) {
+        questions = await DataStore.query(
+          Question,
+          (question) => question.simplified("eq", isSimplified),
+          {
+            sort: (question) => question.questionNo(SortDirection.ASCENDING),
+          }
+        );
+      } else {
+        questions = await DataStore.query(
+          Question,
+          (question) => question.simplified("ne", true),
+          {
+            sort: (question) => question.questionNo(SortDirection.ASCENDING),
+          }
+        );
+      }
+
       setQueries(questions);
       console.log(questions);
     } catch (error) {
-      console.log("Error retrieving posts", error);
+      console.log("Error retrieving questions", error);
     }
   }
 
