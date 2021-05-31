@@ -18,6 +18,7 @@ import AuthFooter from "components/Footers/AuthFooter.js";
 import { COLORS } from "../public/publicColor";
 import { DataStore, Predicates } from "@aws-amplify/datastore";
 import { RecommendCoffee, Result } from "../src/models";
+import { Hub } from "@aws-amplify/core";
 
 function Index() {
   const [registered, setRegistered] = useState(null);
@@ -38,6 +39,10 @@ function Index() {
 
   useEffect(() => {
     getResults();
+    const listener = Hub.listen("datastore", async (hubData) => {
+      const { event, data } = hubData.payload;
+      console.log("DASHDJHASJDHASD", event, data);
+    });
   }, []);
 
   async function getResults() {
