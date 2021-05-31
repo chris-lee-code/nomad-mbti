@@ -53,7 +53,7 @@ function Index() {
   async function getResults() {
     try {
       const results = await DataStore.query(Result, Predicates.ALL);
-      if (results) {
+      if (results && results !== undefined) {
         console.log("The result was successfully retrieved from Datastore.");
         let resultArr = [];
         for (const result of results) {

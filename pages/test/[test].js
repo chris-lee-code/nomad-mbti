@@ -131,9 +131,7 @@ function Test() {
           }
         );
       }
-
       setQueries(questions);
-      console.log(questions);
     } catch (error) {
       console.log("Error retrieving questions", error);
     }
