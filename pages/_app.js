@@ -51,7 +51,6 @@ export default class MyApp extends App {
     let comment = document.createComment(`
 `);
     DataStore.configure();
-    console.log("AWS Config", awsmobile);
     document.insertBefore(comment, document.documentElement);
   }
   static async getInitialProps({ Component, router, ctx }) {

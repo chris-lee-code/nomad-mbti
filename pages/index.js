@@ -39,10 +39,6 @@ function Index() {
 
   useEffect(() => {
     getResults();
-    const listener = Hub.listen("datastore", async (hubData) => {
-      const { event, data } = hubData.payload;
-      console.log("DASHDJHASJDHASD", event, data);
-    });
   }, []);
 
   async function getResults() {
