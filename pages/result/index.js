@@ -38,7 +38,7 @@ function ResultIndex() {
   async function getResults() {
     try {
       const recommendQueries = await DataStore.query(RecommendCoffee);
-      if (recommendQueries) {
+      if (recommendQueries && recommendQueries !== undefined) {
         let menuObj = {};
         for (const menu of recommendQueries) {
           menuObj[Object(menu)["mbti"]] = Object(menu)["coffee"];
