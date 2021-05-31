@@ -29,10 +29,7 @@ class Login extends React.Component {
               <Col xl="6">
                 <Nav className="nav-footer justify-content-center justify-content-xl-end">
                   <NavItem>
-                    <NavLink
-                      href="https://nomadcoders.co/community/type-test"
-                      target="_blank"
-                    >
+                    <NavLink href="https://nomadcoders.co/community/thread/754">
                       <a
                         className="font-weight-bold ml-1 bg-success py-2 px-2 text-white"
                         style={{
@@ -40,6 +37,7 @@ class Login extends React.Component {
                           borderRadius: "10px",
                           fontSize: "20px",
                         }}
+                        target="_blank"
                       >
                         노마드코더에서 추천하기!
                       </a>

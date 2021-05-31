@@ -218,7 +218,7 @@ function Index() {
                         </Button>
                       </Link>
                       <Link
-                        href="https://nomadcoders.co/community/type-test"
+                        href="https://nomadcoders.co/community/thread/754"
                         target="_blank"
                       >
                         <Button

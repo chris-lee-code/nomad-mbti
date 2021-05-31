@@ -37,18 +37,20 @@ function ResultIndex() {
 
   async function getResults() {
     try {
-      let menuObj = {};
       const recommendQueries = await DataStore.query(RecommendCoffee);
-      for (const menu of recommendQueries) {
-        menuObj[Object(menu)["mbti"]] = Object(menu)["coffee"];
+      if (recommendQueries) {
+        let menuObj = {};
+        for (const menu of recommendQueries) {
+          menuObj[Object(menu)["mbti"]] = Object(menu)["coffee"];
+        }
+        setMenuList(menuObj);
+        let resultArr = [];
+        const resultQueries = await DataStore.query(Result);
+        for (const result of resultQueries) {
+          resultArr.push(Object(result)["result"]);
+        }
+        getMostFrequent(resultArr);
       }
-      setMenuList(menuObj);
-      let resultArr = [];
-      const resultQueries = await DataStore.query(Result);
-      for (const result of resultQueries) {
-        resultArr.push(Object(result)["result"]);
-      }
-      getMostFrequent(resultArr);
     } catch (error) {
       console.log("Error getting results: ", error);
     }

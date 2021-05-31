@@ -30,8 +30,6 @@ function Result() {
   const [image, setImage] = useState("");
 
   useEffect(() => {
-    // Start the DataStore, this kicks-off the sync process.
-    DataStore.start();
     getRecommendation(mbti);
   }, []);
 
@@ -265,7 +263,7 @@ function Result() {
                             재밌으셨다면 꼭 추천 부탁드려요~!
                           </h2>
                           <Link
-                            href="https://nomadcoders.co/community/type-test"
+                            href="https://nomadcoders.co/community/thread/754"
                             target="_blank"
                           >
                             <Button
