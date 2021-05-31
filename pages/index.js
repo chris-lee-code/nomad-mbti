@@ -18,7 +18,6 @@ import AuthFooter from "components/Footers/AuthFooter.js";
 import { COLORS } from "../public/publicColor";
 import { DataStore, Predicates } from "@aws-amplify/datastore";
 import { RecommendCoffee, Result } from "../src/models";
-import { Hub } from "@aws-amplify/core";
 
 function Index() {
   const [registered, setRegistered] = useState(null);
@@ -38,8 +37,18 @@ function Index() {
   }, [results]);
 
   useEffect(() => {
+    startDatastore();
     getResults();
   }, []);
+
+  async function startDatastore() {
+    try {
+      await DataStore.start();
+      console.log("Successfully started the datastore.");
+    } catch (error) {
+      console.log("Error starting the datastore:", error);
+    }
+  }
 
   async function getResults() {
     try {
